@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	mailchimp "github.com/beeker1121/mailchimp-go"
-	"github.com/beeker1121/mailchimp-go/query"
+	mailchimp "github.com/phil-inc/mailchimp-go"
+	"github.com/phil-inc/mailchimp-go/query"
 )
 
 // Contact defines the contact information of the list owner, which
@@ -332,3 +332,59 @@ func Delete(listID string) error {
 	path := fmt.Sprintf("lists/%s", listID)
 	return mailchimp.Call("DELETE", path, nil, nil, nil)
 }
+
+//GetLists return all existing lists
+func GetLists() (*Lists, error) {
+	res := &Lists{}
+	if err := mailchimp.Call("GET", "lists", nil, nil, &res); err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+//GetListMember get lists user belongs to
+func GetListMember(listID string, userID string) (*[]List, error) {
+	var res interface{}
+	path := fmt.Sprintf("lists/%s/members/%s", listID, userID)
+	if err := mailchimp.Call("GET", path, nil, nil, &res); err != nil {
+		return nil, err
+	}
+	return nil, nil
+}
+
+// //GetListMergeFields returns merge fields of list
+// func GetListMergeFields(listID string, params *GetListMergeFieldsParams) MergeFields {
+// 	res := &MergeFields{}
+// 	path := fmt.Sprintf("lists/%s/merge-fields", listID)
+
+// 	if params == nil {
+// 		if err := mailchimp.Call("GET", path, nil, nil, res); err != nil {
+// 			return nil, err
+// 		}
+// 		return res, nil
+// 	}
+
+// 	if err := mailchimp.Call("GET", path, params, nil, res); err != nil {
+// 		return nil, err
+// 	}
+// 	return res, nil
+
+// }
+
+// func CreateMergeField(listID string, params *CreateMergeFieldParams) {
+// 	res := &MergeFields{}
+// 	path := fmt.Sprintf("lists/%s/merge-fields", listID)
+
+// 	if params == nil {
+// 		if err := mailchimp.Call("GET", path, nil, nil, res); err != nil {
+// 			return nil, err
+// 		}
+// 		return res, nil
+// 	}
+
+// 	if err := mailchimp.Call("GET", path, params, nil, res); err != nil {
+// 		return nil, err
+// 	}
+
+// 	return res, nil
+// }

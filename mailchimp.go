@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/beeker1121/mailchimp-go/query"
+	"github.com/phil-inc/mailchimp-go/query"
 )
 
 // The MailChimp API url structure.
@@ -84,6 +84,7 @@ func Call(method, path string, queryParams, bodyParams, v interface{}) error {
 	if err != nil {
 		return err
 	}
+
 	defer resp.Body.Close()
 
 	// Handle API error.
@@ -101,4 +102,9 @@ func Call(method, path string, queryParams, bodyParams, v interface{}) error {
 	}
 
 	return nil
+}
+
+//GetKey returns key
+func GetKey() string {
+	return fmt.Sprintf("%s", key)
 }

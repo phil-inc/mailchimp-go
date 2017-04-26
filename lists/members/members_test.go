@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	mailchimp "github.com/beeker1121/mailchimp-go"
-	"github.com/beeker1121/mailchimp-go/lists"
+	mailchimp "github.com/phil-inc/mailchimp-go"
+	"github.com/phil-inc/mailchimp-go/lists"
 )
 
 var listID string
