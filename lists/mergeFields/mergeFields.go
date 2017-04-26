@@ -1,6 +1,6 @@
 package mergeFields
 
-//mergeFields constants
+//mergeField constants
 const (
 	FirstName              = "FIRST_NAME"
 	FullName               = "FULL_NAME"
